@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Table from './Table.svelte';
+	import Table from '../lib/Table.svelte';
 	import { MetamaskCrypt } from '../lib';
 
 	let metamaskCrypt: MetamaskCrypt | null;
