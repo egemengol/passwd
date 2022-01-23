@@ -6,7 +6,6 @@
 
 	const dispatch = createEventDispatcher();
 	function doRemoveRow(index) {
-		console.log('dispatches');
 		dispatch('removeRow', index);
 	}
 </script>
