@@ -1,14 +1,14 @@
 // import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-static';
 
 export default {
 	preprocess: preprocess(),
 	kit: {
 		adapter: adapter({
-			// if true, will split your app into multiple functions
-			// instead of creating a single one for the entire app
-			split: false
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
 		}),
 		target: '#svelte'
 	}
