@@ -1,5 +1,5 @@
 import { Contract, ethers } from 'ethers';
-import Store from '../../../contract/artifacts/contracts/Store.sol/Store.json';
+import Store from '../../static/Store.json';
 import * as nacl from 'tweetnacl';
 import * as naclUtil from 'tweetnacl-util'
 
@@ -70,7 +70,7 @@ export class MetamaskCrypt {
             const address = await this.signer.getAddress();
             // const storeFactory = new ethers.ContractFactory()
             this._store = new ethers.Contract(
-                '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+                '0xd3bC207ffA860B389D2EC35075605147c2A98670',
                 Store.abi,
                 this.provider
             ).connect(this.signer);
