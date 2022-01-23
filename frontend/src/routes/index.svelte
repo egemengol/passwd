@@ -87,11 +87,12 @@
 
 	async function upload() {
 		isSyncing = true;
-		if (!encryptionPubkey) {
-			encryptionPubkey = await getEncryptionPubkey(window.ethereum, address);
-		}
-		const encrypted = encrypt(encryptionPubkey, JSON.stringify(secrets));
-		await store.set(encrypted);
+		// if (!encryptionPubkey) {
+		// 	encryptionPubkey = await getEncryptionPubkey(window.ethereum, address);
+		// }
+		// const encrypted = encrypt(encryptionPubkey, JSON.stringify(secrets));
+		// await store.set(encrypted);
+		await metamaskCrypt.write(secrets);
 		isSyncing = false;
 	}
 
