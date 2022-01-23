@@ -5,9 +5,7 @@
 	import Store from '../../../contract/artifacts/contracts/Store.sol/Store.json';
 	import * as nacl from 'tweetnacl';
 	import * as naclUtil from 'tweetnacl-util';
-	import { hexlify } from 'ethers/lib/utils';
-	// import { bufferToHex } from 'ethereumjs-util';
-	// const ethUtil = require('ethereumjs-util');
+	import MetamaskCrypt from '../MetamaskCrypt';
 
 	let provider;
 	let signer;
@@ -75,35 +73,12 @@
 	};
 
 	onMount(async () => {
-		provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-		signer = provider.getSigner();
-		address = await signer.getAddress();
-		// const storeFactory = new ethers.ContractFactory()
-		store = new ethers.Contract(
-			'0x5fbdb2315678afecb367f032d93f642f64180aa3',
-			Store.abi,
-			provider
-		).connect(signer);
+		const mc = new MetamaskCrypt(window.ethereum);
 		try {
-			await provider.send('eth_requestAccounts', []);
+			secrets = await mc.read();
 		} catch (error) {
-			alert('Log in to metamask');
-		}
-		const encrypted: string = await store.get();
-		if (encrypted === '0x') {
-			secrets = [];
-		} else {
-			try {
-				const decrypted = await window.ethereum.request({
-					method: 'eth_decrypt',
-					params: [encrypted, address]
-				});
-				secrets = JSON.parse(decrypted);
-				// console.log('secrets', JSON.parse(secrets));
-			} catch (error) {
-				console.log(error.message);
-				alert(error.message);
-			}
+			console.log(error.message);
+			alert(error.message);
 		}
 		isSyncing = false;
 	});
