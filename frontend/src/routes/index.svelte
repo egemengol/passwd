@@ -7,6 +7,8 @@
 	import * as naclUtil from 'tweetnacl-util';
 	import MetamaskCrypt from '../MetamaskCrypt';
 
+	let metamaskCrypt;
+
 	let provider;
 	let signer;
 	let address;
@@ -73,9 +75,9 @@
 	};
 
 	onMount(async () => {
-		const mc = new MetamaskCrypt(window.ethereum);
+		metamaskCrypt = new MetamaskCrypt(window.ethereum);
 		try {
-			secrets = await mc.read();
+			secrets = await metamaskCrypt.read();
 		} catch (error) {
 			console.log(error.message);
 			alert(error.message);

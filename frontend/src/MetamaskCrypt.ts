@@ -18,42 +18,43 @@ export default class MetamaskCrypt {
         return this.provider.getSigner();
     }
 
-    get address() {
-        return (async () => await this.signer.getAddress())();
+    async getAddress() {
+        return this.signer.getAddress();
     }
 
-    get store() {
+    async getStore() {
         if (!this._store) {
             console.log('calculated store')
-            return (async () => {
-                const address = await this.signer.getAddress();
-                // const storeFactory = new ethers.ContractFactory()
-                this._store = new ethers.Contract(
-                    '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-                    Store.abi,
-                    this.provider
-                ).connect(this.signer);
-                return this._store;
-            })();
+            const address = await this.signer.getAddress();
+            // const storeFactory = new ethers.ContractFactory()
+            this._store = new ethers.Contract(
+                '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+                Store.abi,
+                this.provider
+            ).connect(this.signer);
         } else {
             console.log('used cached store')
-            return this._store;
         }
+        return this._store;
     }
 
     public async read() {
         await this.provider.send('eth_requestAccounts', []);
-        const store = await this.store
+        const store = await this.getStore();
         const encrypted: string = await store.get();
         if (encrypted === '0x') {
             return [];
         } else {
             const decrypted = await this.ethereum.request({
                 method: 'eth_decrypt',
-                params: [encrypted, await this.address]
+                params: [encrypted, await this.getAddress()]
             });
             return JSON.parse(decrypted);
         }
+    }
+
+    public async write(state) {
+
     }
 
 }
