@@ -19,8 +19,10 @@ Contract side is only a simple 1-level key-value store. The complete state is en
 
 ## Future work
 - For a password manager to succeed, it ***must*** be usable across multiple platforms comfortably. 
+- Offline cached passwords will be a breeze to implement since you can safely store encrypted data locally, in the same way you store it upstream.
 - Multiple wallet integrations are a must, as far as I can see Trust wallet has way wider adoption by mobile users.
+- Some features like generating passwords, autofill and shared passwords and such are in the works.
+- Since only blobs are to be read, it would be easy to integrate a CDN for read only access.
 - Using passwords is clunky. You can sign a message for a given app and it can reach the blockchain to check if you truly are who you are claiming to be. Just like Google Auth.
 - Storing and modifying the whole state altogether is inefficient at best. We can come up with different schemas allowing more granular access, however in cryptology one cannot be too careful. Giving away information that you thought was irrelevant and insignificant for comfort is a sure way to get hacked.
 - Last but not least, we *need* to spend some effort to verify that we make use of the correct libraries, in the way they are meant to be used. We need to study concepts like 'salting' and 'peppering' ([I kid you not](https://www.youtube.com/watch?v=FvstbO787Qo)) to make sure our data is safe out in the open, in one of the most publicly accessible databases ever.
-- Some features like generating passwords, autofill and shared passwords and such are in the works.
