@@ -7,7 +7,7 @@ This is a work in progress, do not store critical data! Also licensing will be f
 ## Benefits
 A password manager on blockchain definitely has some properties that the conventional ones don't.
 - I think most people do not rotate their passwords as often as they should, writing rarely and reading frequently is really in line with current blockchain access patterns.
-- This has the side effect of only paying transaction fees on writes, reads are free and forever. No one can decide that you do not have access to your passwords anymore, no one can prevent you using this service.
+- This has the side effect of only paying transaction fees on writes, reads are free forever. No one can decide that you do not have access to your passwords anymore, no one can prevent you using this service.
 - Also there aren't any centralized servers. Which means there are no servers to fail, no company to go bankrupt. You have complete ownership over your data.
 
 ## Method
